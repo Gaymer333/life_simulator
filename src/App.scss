@@ -1,0 +1,18 @@
+.App {
+    height: 100vh;
+    display: flex;
+    
+
+    .SideBar {
+        width: 350px;
+        background-color: #212243;
+        border-right: solid black 3px;
+        padding: 20px;
+        color: white;
+    }
+
+    .Board {
+        padding: 20px;
+    }
+
+}

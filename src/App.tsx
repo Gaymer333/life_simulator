@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer, useState } from 'react';
+import './App.scss';
+import Display from './components/Display';
+import { StatDictionary, StatType, defualtStats, makeDefualtStat, StatHandlerType } from './types/stats';
+import { tools } from './types/tools';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [stats,_setStats] = useState<StatDictionary>(defualtStats)
+  const statHandler: StatHandlerType = {stats, _setStats}
+
+  const props: tools = {
+    statHandler
+  }
+
+  return <Display {...props} />
 }
 
 export default App;

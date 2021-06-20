@@ -1,14 +1,23 @@
 import React from 'react'
-import { StatDictionary } from '../types/stats'
-import { tools } from '../types/tools'
+import gameData from '../classes/gameData'
 import Board from './Board'
 import SideBar from './SideBar'
 
-type DisplayProps = tools
 
-const Display = (props: DisplayProps) => <div className="App">
-    <SideBar {...props} />
-    <Board {...props} />
-</div>
 
-export default Display
+
+export default class Display extends React.Component {
+
+    rerender = () => {
+        this.forceUpdate()
+    }
+
+    render(){
+        gameData.rerender = this.rerender
+
+        return <div className="App">
+            <SideBar />
+            <Board />
+        </div>
+    }
+}

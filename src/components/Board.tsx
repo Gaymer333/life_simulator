@@ -1,30 +1,27 @@
 import React from 'react'
-import { changeStat, getStat } from '../function/stat'
-import { StatHandlerType, stats } from '../types/stats'
-import { tools } from '../types/tools'
+import { DoStatAction } from '../classes/action'
 
-type DisplayProps = tools
-type ActionProps = {
-    statHandler: StatHandlerType
+
+const WorkAction = () => {
+    DoStatAction({
+        actionRequirements: [{statKey: 'energy', minValue: 1}],
+        actionChanges: [
+            {statKey: 'money', actionMethod: 'add', actionValue: 50},
+            {statKey: 'energy', actionMethod: 'remove', actionValue: 1}
+        ],
+        actionTime: {hours: 2}
+    })
+}
+const SleepAction = () => {
+    DoStatAction({actionChanges: [
+        {statKey: 'energy', actionMethod: 'add', actionValue: 33}
+    ]})
 }
 
-const ActionDisplay = ({statHandler}: ActionProps) => {
-    
-}
-
-const work = ({statHandler}: ActionProps) => {
-    changeStat(statHandler, stats.energy, -10)
-    changeStat(statHandler, stats.money, 10)
-}
-
-const sleep = ({statHandler}: ActionProps) => {
-    changeStat(statHandler, stats.energy, 10)
-}
-
-const Board = ({statHandler}: DisplayProps) => <div className="Board">
+const Board = () => <div className="Board">
     <h1>What do you want to do?</h1>
-    <button onClick={() => sleep({statHandler})}>Sleep</button>
-    <button onClick={() => work({statHandler})}>Work</button>
+    <button onClick={() => WorkAction()} >Work</button>
+    <button onClick={() => SleepAction()} >Sleep</button>
 </div>
 
 export default Board

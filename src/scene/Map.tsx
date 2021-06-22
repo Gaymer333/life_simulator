@@ -1,9 +1,10 @@
-import { moveScene } from "../components/Board"
+import { moveScene, MoveButton } from "../components/Board"
 
 const Map = () => <>
     <h1>Map</h1>
-    <button onClick={() => moveScene("home")}>Home</button>
-    <button onClick={() => moveScene("canteen")}>Canteen</button>
+    <MoveButton sceneName="home" label="Home" />
+    <MoveButton sceneName="canteen" label="Canteen" />
+    <MoveButton sceneName="gym" label="gym" />
 </>
 
 export default Map

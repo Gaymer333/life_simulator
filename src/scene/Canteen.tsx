@@ -1,5 +1,5 @@
 import { DoStatAction } from "../classes/action"
-import { moveScene } from "../components/Board"
+import { moveScene, MoveButton } from "../components/Board"
 
 
 const WorkAction = () => {
@@ -17,7 +17,7 @@ const Canteen = () => <>
     <button onClick={() => WorkAction()} >Work</button>
     <br />
     <br />
-    <button onClick={() => moveScene("map")}>Map</button>
+    <MoveButton sceneName="map" label="Leave" />
 </>
 
 export default Canteen

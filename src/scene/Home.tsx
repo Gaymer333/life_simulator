@@ -1,5 +1,6 @@
 import { DoStatAction } from "../classes/action";
-import { moveScene } from "../components/Board";
+import { MoveButton } from "../components/Board";
+
 const SleepAction = () => {
     DoStatAction({
         actionChanges: [
@@ -15,7 +16,7 @@ const Home = () => <>
     <button onClick={() => SleepAction()} >Sleep</button>
     <br />
     <br />
-    <button onClick={() => moveScene("map")}>Go out</button>
+    <MoveButton sceneName="map" label="Leave" />
 </>
 
 export default Home

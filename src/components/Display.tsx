@@ -6,18 +6,9 @@ import SideBar from './SideBar'
 
 
 
-export default class Display extends React.Component {
+const Display = () => <div className="App">
+    <SideBar />
+    <Board />
+</div>
 
-    rerender = () => {
-        this.forceUpdate()
-    }
-
-    render(){
-        gameData.rerender = this.rerender
-
-        return <div className="App">
-            <SideBar />
-            <Board />
-        </div>
-    }
-}
+export default Display

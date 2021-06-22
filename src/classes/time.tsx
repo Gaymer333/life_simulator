@@ -18,7 +18,7 @@ export default class Time {
     addHours = (hours: number) => {
         let newHoursValue = this.hours + hours;
         if (newHoursValue >= 24) {
-            this.addDays(Math.floor(newHoursValue/24))
+            this.addDays(Math.floor(newHoursValue / 24))
             newHoursValue = newHoursValue % 24
         }
         this.hours = newHoursValue
@@ -27,12 +27,12 @@ export default class Time {
     addMins = (mins: number) => {
         let newMinsValue = this.mins + mins;
         if (newMinsValue >= 60) {
-            this.addHours(Math.floor(newMinsValue/60))
+            this.addHours(Math.floor(newMinsValue / 60))
             newMinsValue = newMinsValue % 60
         }
         this.mins = newMinsValue
     }
 
-    renderDay = () => <>{dayNames[this.dayOfWeek-1]}</>
+    renderDay = () => <>{dayNames[this.dayOfWeek - 1]}</>
     renderTime = () => <>{this.hours}:{this.mins < 10 ? "0" + this.mins : this.mins}</>
 }

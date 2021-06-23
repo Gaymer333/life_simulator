@@ -2,9 +2,10 @@ import React from "react";
 import gameData, { StatKeys } from "./gameData";
 import Stat from "./stat";
 
-type StatChangeMethodType = "add" | "remove" | "set"
+type StatChangeMethodType = "add" | "remove" | "set" | "max" | "min"
 
 type DoActionTimeType = {
+    method: "add" | "set"
     days?: number,
     hours?: number,
     mins?: number
@@ -19,7 +20,7 @@ type DoStatActionRequirmentType = {
 type DoStatChangeType = {
     statKey: StatKeys,
     actionMethod: StatChangeMethodType,
-    actionValue: number
+    actionValue?: number
 }
 
 type DoStatActionType = {
@@ -48,20 +49,31 @@ export const DoStatAction = (actionDetails: DoStatActionType) => {
             const stat: Stat = gameData.getStat(actionChange.statKey)
             switch (actionChange.actionMethod) {
                 case "add":
-                    stat.AddValue(actionChange.actionValue);
+                    actionChange.actionValue && stat.AddValue(actionChange.actionValue);
                     break;
                 case "remove":
-                    stat.RemoveValue(actionChange.actionValue);
+                    actionChange.actionValue && stat.RemoveValue(actionChange.actionValue);
                     break;
+                case "max":
+                    stat.SetToMax()
+                    break
 
                 default:
                     break;
             }
         });
 
-        actionDetails.actionTime?.mins && gameData.time.addMins(actionDetails.actionTime?.mins)
-        actionDetails.actionTime?.hours && gameData.time.addHours(actionDetails.actionTime?.hours)
-        actionDetails.actionTime?.days && gameData.time.addDays(actionDetails.actionTime?.days)
+        if (actionDetails.actionTime?.method === "add") {
+            actionDetails.actionTime?.mins && gameData.time.addMins(actionDetails.actionTime?.mins)
+            actionDetails.actionTime?.hours && gameData.time.addHours(actionDetails.actionTime?.hours)
+            actionDetails.actionTime?.days && gameData.time.addDays(actionDetails.actionTime?.days)
+        }
+
+        if (actionDetails.actionTime?.method === "set") {
+            actionDetails.actionTime?.mins !== undefined && gameData.time.setMins(actionDetails.actionTime?.mins)
+            actionDetails.actionTime?.hours !== undefined && gameData.time.setHours(actionDetails.actionTime?.hours)
+            actionDetails.actionTime?.days !== undefined && gameData.time.setDays(actionDetails.actionTime?.days)
+        }
 
         if ((actionDetails.rerender !== false || actionDetails.actionTime !== undefined) && gameData.sidebarRerender) gameData.sidebarRerender()
     }

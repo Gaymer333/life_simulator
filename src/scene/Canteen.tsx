@@ -9,7 +9,7 @@ const WorkAction = () => {
             { statKey: 'money', actionMethod: 'add', actionValue: 50 },
             { statKey: 'energy', actionMethod: 'remove', actionValue: 20 }
         ],
-        actionTime: { hours: 2 }
+        actionTime: { method: "add", hours: 2 }
     })
 }
 

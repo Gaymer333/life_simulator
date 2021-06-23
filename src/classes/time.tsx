@@ -33,6 +33,17 @@ export default class Time {
         this.mins = newMinsValue
     }
 
+    setMins(mins: number) {
+        console.log("this.mins > mins ? 60 - this.mins + mins : mins - this.mins:", this.mins > mins ? 60 - this.mins + mins : mins - this.mins)
+        this.addMins(this.mins > mins ? 60 - this.mins + mins : mins - this.mins)
+    }
+    setHours(hours: number) {
+        this.addHours(this.hours > hours ? 24 - this.hours + hours : hours - this.hours)
+    }
+    setDays(days: number) {
+        this.addDays(this.dayOfWeek > days ? 7 - this.dayOfWeek + days : days - this.dayOfWeek)
+    }
+
     renderDay = () => <>{dayNames[this.dayOfWeek - 1]}</>
     renderTime = () => <>{this.hours}:{this.mins < 10 ? "0" + this.mins : this.mins}</>
 }

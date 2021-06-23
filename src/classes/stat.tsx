@@ -34,4 +34,8 @@ export default class Stat {
         const newValue = this.value - value
         this.value = newValue < this.minValue ? this.minValue : newValue
     }
+
+    SetToMax() {
+        this.value = this.maxValue
+    }
 }

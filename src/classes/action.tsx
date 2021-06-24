@@ -63,17 +63,23 @@ export const DoStatAction = (actionDetails: DoStatActionType) => {
             }
         });
 
-        if (actionDetails.actionTime?.method === "add") {
-            actionDetails.actionTime?.mins && gameData.time.addMins(actionDetails.actionTime?.mins)
-            actionDetails.actionTime?.hours && gameData.time.addHours(actionDetails.actionTime?.hours)
-            actionDetails.actionTime?.days && gameData.time.addDays(actionDetails.actionTime?.days)
+        if (actionDetails.actionTime) {
+            const beforeTime = gameData.time.getTimeWrapper();
+            if (actionDetails.actionTime?.method === "add") {
+                actionDetails.actionTime?.mins && gameData.time.addMins(actionDetails.actionTime?.mins)
+                actionDetails.actionTime?.hours && gameData.time.addHours(actionDetails.actionTime?.hours)
+                actionDetails.actionTime?.days && gameData.time.addDays(actionDetails.actionTime?.days)
+            }
+
+            if (actionDetails.actionTime?.method === "set") {
+                actionDetails.actionTime?.mins !== undefined && gameData.time.setMins(actionDetails.actionTime?.mins)
+                actionDetails.actionTime?.hours !== undefined && gameData.time.setHours(actionDetails.actionTime?.hours)
+                actionDetails.actionTime?.days !== undefined && gameData.time.setDays(actionDetails.actionTime?.days)
+            }
+            gameData.time.checkTimeEvent(beforeTime)
         }
 
-        if (actionDetails.actionTime?.method === "set") {
-            actionDetails.actionTime?.mins !== undefined && gameData.time.setMins(actionDetails.actionTime?.mins)
-            actionDetails.actionTime?.hours !== undefined && gameData.time.setHours(actionDetails.actionTime?.hours)
-            actionDetails.actionTime?.days !== undefined && gameData.time.setDays(actionDetails.actionTime?.days)
-        }
+
 
         if ((actionDetails.rerender !== false || actionDetails.actionTime !== undefined) && gameData.sidebarRerender) gameData.sidebarRerender()
     }

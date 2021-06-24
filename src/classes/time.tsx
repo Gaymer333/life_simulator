@@ -1,6 +1,34 @@
 import React from "react";
+import { SceenNames } from "../components/Board";
 
-const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+type TimeWrapper = {
+    dayOfWeek: number,
+    hours: number,
+    mins: number
+}
+
+type TimeEvent = {
+    location: SceenNames | "all",
+    dayOfWeek: DayNames | "all",
+    time: {
+        hours: number,
+        mins: number
+    }
+}
+
+type DayNames = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
+
+const dayNames: Array<DayNames> = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+const events: Array<TimeEvent> = [{
+    location: "all",
+    dayOfWeek: "all",
+    time: {
+        hours: 0,
+        mins: 0
+    }
+}]
+
 
 export default class Time {
     dayOfWeek = 1;
@@ -14,7 +42,6 @@ export default class Time {
         }
         this.dayOfWeek = newDaysValue
     }
-
     addHours = (hours: number) => {
         let newHoursValue = this.hours + hours;
         if (newHoursValue >= 24) {
@@ -23,7 +50,6 @@ export default class Time {
         }
         this.hours = newHoursValue
     }
-
     addMins = (mins: number) => {
         let newMinsValue = this.mins + mins;
         if (newMinsValue >= 60) {
@@ -34,7 +60,6 @@ export default class Time {
     }
 
     setMins(mins: number) {
-        console.log("this.mins > mins ? 60 - this.mins + mins : mins - this.mins:", this.mins > mins ? 60 - this.mins + mins : mins - this.mins)
         this.addMins(this.mins > mins ? 60 - this.mins + mins : mins - this.mins)
     }
     setHours(hours: number) {
@@ -42,6 +67,36 @@ export default class Time {
     }
     setDays(days: number) {
         this.addDays(this.dayOfWeek > days ? 7 - this.dayOfWeek + days : days - this.dayOfWeek)
+    }
+
+    turnTimeWrapperIntoTotalMins = (timeWrapper: TimeWrapper = this.getTimeWrapper()) => {
+        return (timeWrapper.dayOfWeek * 60 * 24) + (timeWrapper.hours * 60) + timeWrapper.mins
+    }
+
+    getTimeWrapper = (): TimeWrapper => {
+        return {
+            dayOfWeek: this.dayOfWeek,
+            hours: this.hours,
+            mins: this.mins
+        }
+    }
+
+    checkTimeEvent = (beforeTime: TimeWrapper) => {
+        const beforeTimeInMins = this.turnTimeWrapperIntoTotalMins(beforeTime)
+        const afterTime = this.getTimeWrapper()
+        const afterTimeInMins = this.turnTimeWrapperIntoTotalMins(afterTime)
+        console.log("beforeTime.dayOfWeek:", beforeTime.dayOfWeek)
+        console.log("afterTime.dayOfWeek:", afterTime.dayOfWeek)
+        const days: Array<DayNames | "all"> = beforeTime.dayOfWeek === afterTime.dayOfWeek
+            ?
+            dayNames.slice(afterTime.dayOfWeek - 1, afterTime.dayOfWeek)
+            :
+            beforeTime.dayOfWeek <= afterTime.dayOfWeek
+                ?
+                dayNames.slice(beforeTime.dayOfWeek - 1, afterTime.dayOfWeek)
+                :
+                [...dayNames.slice(0, afterTime.dayOfWeek), ...dayNames.slice(beforeTime.dayOfWeek - 1, dayNames.length)]
+        console.log("days:", days)
     }
 
     renderDay = () => <>{dayNames[this.dayOfWeek - 1]}</>

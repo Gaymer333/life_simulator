@@ -1,6 +1,6 @@
 import React from "react";
 
-const dayNames = ["Monday", "Tuesday", "Wensday", "Thursday", "Friday", "Saturday", "Sunday"]
+const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 export default class Time {
     dayOfWeek = 1;

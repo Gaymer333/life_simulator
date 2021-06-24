@@ -34,6 +34,7 @@ export default class SideBar extends React.Component {
             <h2>Status:</h2>
             <StatBar stat={gameData.getStat('money')} showMaxValue={false} />
             <StatBar stat={gameData.getStat('energy')} />
+            <StatBar stat={gameData.getStat('strength')} />
         </div>
     }
 }

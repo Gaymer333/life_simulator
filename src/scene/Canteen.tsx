@@ -14,6 +14,7 @@ const WorkAction = () => {
 }
 
 const Canteen = () => <>
+    <h1>Canteen</h1>
     <button onClick={() => WorkAction()} >Work</button>
     <br />
     <br />

@@ -1,12 +1,12 @@
 import React from 'react'
-import { DoStatAction } from '../classes/action'
 import gameData from '../classes/gameData'
 import Canteen from '../scene/Canteen'
 import Gym from '../scene/Gym'
 import Home from '../scene/Home'
 import Map from '../scene/Map'
 
-let CurrentSceen = Home
+export let CurrentSceen = Home
+export let CurrentSceenName: SceenNames = "home" 
 
 export type SceenNames = "map" | "canteen" | "home" | "gym"
 
@@ -14,6 +14,7 @@ export const MoveButton = ({ sceneName, label }: { sceneName: SceenNames, label:
 
 export const moveScene = (sceenName: SceenNames) => {
     console.log("Heyya")
+    CurrentSceenName = sceenName
     switch (sceenName) {
         case "map":
             CurrentSceen = Map
@@ -26,9 +27,6 @@ export const moveScene = (sceenName: SceenNames) => {
             break;
         case "gym":
             CurrentSceen = Gym
-            break;
-
-        default:
             break;
     }
     console.log(CurrentSceen)

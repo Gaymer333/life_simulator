@@ -1,4 +1,3 @@
-import React from "react";
 import Stat from "./stat";
 import Time from "./time";
 

@@ -1,4 +1,4 @@
-import { moveScene, MoveButton } from "../components/Board"
+import { MoveButton } from "../components/Board"
 
 const Map = () => <>
     <h1>Map</h1>

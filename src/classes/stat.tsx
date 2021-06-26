@@ -1,6 +1,3 @@
-import React from "react"
-import gameData from "./gameData";
-
 type StatType = {
     key: string
     name: string

@@ -1,5 +1,5 @@
 import { DoStatAction } from "../classes/action"
-import { moveScene, MoveButton } from "../components/Board"
+import { MoveButton } from "../components/Board"
 
 
 const WorkAction = () => {

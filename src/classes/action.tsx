@@ -1,4 +1,3 @@
-import React from "react";
 import gameData, { StatKeys } from "./gameData";
 import Stat from "./stat";
 
@@ -17,7 +16,7 @@ type DoStatActionRequirmentType = {
     maxValue?: number
 }
 
-type DoStatChangeType = {
+export type DoStatChangeType = {
     statKey: StatKeys,
     actionMethod: StatChangeMethodType,
     actionValue?: number
@@ -35,13 +34,12 @@ type RerenderOptionType = {
 
 export const DoStatAction = (actionDetails: DoStatActionType) => {
 
-    let checkPassed = true
-
-    actionDetails.actionRequirements?.map(actionRequirement => {
+    const checkPassed = actionDetails.actionRequirements?.every((actionRequirement) => {
         const stat: Stat = gameData.getStat(actionRequirement.statKey)
-        if (actionRequirement.maxValue && stat.value > actionRequirement.maxValue) checkPassed = false
-        if (actionRequirement.minValue && stat.value < actionRequirement.minValue) checkPassed = false
-    })
+        if (actionRequirement.maxValue && stat.value > actionRequirement.maxValue) return false
+        if (actionRequirement.minValue && stat.value < actionRequirement.minValue) return false
+        return true
+    }) ?? true
 
     if (checkPassed) {
         actionDetails.actionChanges.forEach(actionChange => {

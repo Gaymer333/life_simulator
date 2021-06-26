@@ -1,5 +1,3 @@
-import React from 'react'
-import gameData from '../classes/gameData'
 import Board from './Board'
 import SideBar from './SideBar'
 

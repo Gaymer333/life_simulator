@@ -24,6 +24,20 @@ const dayNames: Array<DayNames> = ["Monday", "Tuesday", "Wednesday", "Thursday",
 
 const events: Array<TimeEvent> = [{
     location: "all",
+    dayOfWeek: "Tuesday",
+    time: {
+        hours: 0,
+        mins: 0
+    },
+    statChangeAction: [
+        {
+            statKey: "strength",
+            actionMethod: "remove",
+            actionValue: 1
+        }
+    ]
+},{
+    location: "all",
     dayOfWeek: "all",
     time: {
         hours: 0,
@@ -152,7 +166,7 @@ export default class Time {
                 returnEvents = relevantEvents.filter(event => {
                     const eventTimeInMins = event.time.hours*60 + event.time.mins;
                     const beforeCheck = this.checkBetweenTwoMins(beforeTimeInMins, maxMinsInADay, eventTimeInMins)
-                    const afterCheck = this.checkBetweenTwoMins(0, afterTimeInMins, eventTimeInMins)
+                    const afterCheck = this.checkBetweenTwoMins(-1, afterTimeInMins, eventTimeInMins)
                     if (event.dayOfWeek === "all") return beforeCheck || afterCheck
                     if (event.dayOfWeek === days[0]) return beforeCheck
                     else return afterCheck
